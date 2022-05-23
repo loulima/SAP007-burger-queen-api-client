@@ -18,7 +18,7 @@ function Login() {
           <br />
             <Input
             type="email"
-            className="input"
+            className="input-text"
             label= "E-mail"
             placeholder="user@email.com"
             // onChange={onChange}
@@ -30,7 +30,7 @@ function Login() {
             <br />
             <Input
             type="password"
-            className="input"
+            className="input-text"
             label="Senha"
             placeholder="*****"
             required = "required"
@@ -42,7 +42,7 @@ function Login() {
             text="Entrar"
             />
             <br />
-            <p> Não tem uma conta?
+            <p className="text-link"> Não tem uma conta?
               <Link
                 className="text-link"
                 to="/Register">
