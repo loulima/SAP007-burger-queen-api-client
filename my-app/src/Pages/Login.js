@@ -2,7 +2,7 @@ import {BtnSubmit} from "../Components/ButtonSubmit";
 import {Input} from "../Components/Input";
 import logotipo from '../img/logotipo.svg';
 // import { useState } from "react";
-// import { Link } from "react-router-dom";
+import { Link } from "react-router-dom";
 
 function Login() {
   
@@ -46,9 +46,9 @@ function Login() {
             />
             <br />
             <p> Não tem uma conta? Cadastre-se
-            {/* <Link className="text-link" to="/Register">
+            <Link className="text-link" to="/Register">
             Cadastre-se
-          </Link> */}
+          </Link>
             </p>
         </form>
     </section>
