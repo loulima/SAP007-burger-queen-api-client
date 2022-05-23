@@ -1,6 +1,6 @@
 function InputEmail() {
     return (
-      <input type="email" placeholder="nota" />
+      <input type="email" placeholder="Email" autoFocus required />
     );
   }
   

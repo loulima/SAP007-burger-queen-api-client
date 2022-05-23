@@ -1,6 +1,6 @@
 function InputPassword() {
     return (
-        <input type="password" placeholder="Senha" />
+        <input type="password" placeholder="Senha" required />
         );
   }
   

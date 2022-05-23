@@ -1,0 +1,36 @@
+
+*{
+  margin:0;
+  line-height: 1.8em;
+  list-style: none;
+  text-decoration: none;
+  font-size: 18px;
+  font-family: 'Roboto', sans-serif;
+}
+
+.loginContainer{
+  display: grid;
+  grid-template-columns: repeat(5, 1fr);
+  grid-template-rows: repeat(3, 1fr);
+  grid-column-gap: 0px;
+  grid-row-gap: 20px;
+  background-color: beige;
+}
+
+.loginForm{
+  grid-area: 2 / 3 / 3 / 4;
+  
+}
+
+.Bq-logo {
+  height: 35vmin;
+  pointer-events: none;
+  grid-area: 1 / 3 / 2 / 4; 
+  
+}
+
+@media (prefers-reduced-motion: no-preference) {
+  .Bq-logo {
+    animation: App-logo-spin infinite 20s linear;
+  }
+}
