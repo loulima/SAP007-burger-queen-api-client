@@ -6,6 +6,7 @@
   text-decoration: none;
   font-size: 18px;
   font-family: 'Roboto', sans-serif;
+  border-radius: 5px;
 }
 
 .loginContainer{
@@ -15,13 +16,16 @@
   grid-column-gap: 0px;
   grid-row-gap: 20px;
   background-color: beige;
+  
 }
 
 .loginForm{
   grid-area: 2 / 3 / 3 / 4;
   
 }
-
+.btnSubmitLogin{
+  width: max-content;
+}
 .Bq-logo {
   height: 35vmin;
   pointer-events: none;
