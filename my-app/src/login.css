@@ -9,7 +9,7 @@
   border-radius: 5px;
 }
 
-.loginContainer{
+.loginContainer, .registerContainer{
   display: grid;
   grid-template-columns: repeat(5, 1fr);
   grid-template-rows: repeat(3, 1fr);
@@ -19,12 +19,13 @@
   
 }
 
-.loginForm{
+.loginForm, .register-form{
   grid-area: 2 / 3 / 3 / 4;
   
 }
-.btnSubmitLogin{
-  width: max-content;
+.button-submit{
+  width: fit-content;
+  height:fit-content;
 }
 .Bq-logo {
   height: 35vmin;

@@ -1,10 +1,12 @@
 import logotipo from '../img/logotipo.svg';
 import {BtnSubmit} from "../Components/ButtonSubmit";
 import {Input} from "../Components/Input";
+import { Link } from "react-router-dom";
 
 function Register() {
     return(
         <>
+        <div className="registerContainer">
         <img className="Bq-logo"
         alt="Burguer Queen logotipo"
         src={logotipo} />
@@ -66,8 +68,24 @@ function Register() {
                     />
                     <br />
                 </section>
-                <BtnSubmit text="Cadastrar"/>
-        </form></>
+
+                <BtnSubmit
+                type="submit"
+                className="button-submit"
+                text="Cadastrar"/>
+                <br />
+                <p>
+                    <Link
+                        className="text-link"
+                        to="/">
+                        Voltar para Página Inicial
+                    </Link>
+                </p>
+        </form>
+        
+
+        </div>
+        </>
     );
     };
     export default Register;
