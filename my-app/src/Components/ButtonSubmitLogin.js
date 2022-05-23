@@ -1,6 +1,6 @@
 function BtnSubmitLogin() {
     return (
-        <button type="button"> Entrar </button>
+        <button type="button" className="btnSubmitLogin"> Entrar </button>
     );
   }
   
