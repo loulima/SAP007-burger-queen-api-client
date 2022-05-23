@@ -2,7 +2,7 @@ import {BtnSubmit} from "../Components/ButtonSubmit";
 import {Input} from "../Components/Input";
 import logotipo from '../img/logotipo.svg';
 // import { useState } from "react";
-// import { Link } from "react-router-dom";
+import { Link } from "react-router-dom";
 
 function Login() {
   
@@ -23,7 +23,7 @@ function Login() {
             placeholder="user@email.com"
             // onChange={onChange}
             title = "Insira um formato de email válido"
-            // pattern = {"[a-z0-9._%+-]+@[a-z0-9.-]+\.[a-z]{2, 4}$"}
+            pattern = {"[a-z0-9._%+-]+@[a-z0-9.-]+\.[a-z]{2, 4}$"}
             autoFocus = "autoFocus"
             required = "required"
             />
@@ -35,20 +35,19 @@ function Login() {
             placeholder="*****"
             required = "required"
             />
-            
-            
             <br />
-
             <BtnSubmit
             type="submit"
-            value="Entrar"
+            className="button-submit"
             text="Entrar"
             />
             <br />
-            <p> Não tem uma conta? Cadastre-se
-            {/* <Link className="text-link" to="/Register">
-            Cadastre-se
-          </Link> */}
+            <p> Não tem uma conta?
+              <Link
+                className="text-link"
+                to="/Register">
+                Cadastre-se
+              </Link>
             </p>
         </form>
     </section>

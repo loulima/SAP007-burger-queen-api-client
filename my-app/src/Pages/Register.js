@@ -1,10 +1,12 @@
 import logotipo from '../img/logotipo.svg';
 import {BtnSubmit} from "../Components/ButtonSubmit";
 import {Input} from "../Components/Input";
+import { Link } from "react-router-dom";
 
 function Register() {
     return(
         <>
+        <div className="registerContainer">
         <img className="Bq-logo"
         alt="Burguer Queen logotipo"
         src={logotipo} />
@@ -27,6 +29,8 @@ function Register() {
                     name="input"
                     placeholder="user@user.com"
                     required = "required"
+                    pattern = {"[a-z0-9._%+-]+@[a-z0-9.-]+\.[a-z]{2, 4}$"}
+                    title = "Insira um formato de email válido"
                     />
                     <br />
                     <Input
@@ -64,8 +68,24 @@ function Register() {
                     />
                     <br />
                 </section>
-                <BtnSubmit text="Cadastrar"/>
-        </form></>
+
+                <BtnSubmit
+                type="submit"
+                className="button-submit"
+                text="Cadastrar"/>
+                <br />
+                <p>
+                    <Link
+                        className="text-link"
+                        to="/">
+                        Voltar para Página Inicial
+                    </Link>
+                </p>
+        </form>
+        
+
+        </div>
+        </>
     );
     };
     export default Register;
