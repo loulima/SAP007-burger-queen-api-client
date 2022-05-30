@@ -1,9 +1,45 @@
+import { useState } from "react";
+import { Link,  useNavigate } from "react-router-dom";
+import { createUser } from "../Services/auth";
+import { statusCode } from "../Services/error";
+import { setToken } from "../Services/localStorage";
+import { MessageStatusCode } from "../Components/MessageStatusCode";
+import { BtnSubmit } from "../Components/ButtonSubmit";
+import { Input } from "../Components/Input";
 import logotipo from '../img/logotipo.svg';
-import {BtnSubmit} from "../Components/ButtonSubmit";
-import {Input} from "../Components/Input";
-import { Link } from "react-router-dom";
+
+
 
 function Register() {
+
+    const [name, setName] = useState("");
+    const [email, setEmail] = useState("");
+    const [password, setPassword] = useState("");
+    const [role, setRole] = useState("saloon");
+    const [errorMessage, setErrorMessage] = useState("");
+    const navigate = useNavigate();
+
+    ///Função para entrar no sistema:
+    const signUp = (e) => {
+        e.preventDefault();
+        createUser(name, email, password, role)
+          .then((response) => {
+            if (response.status === 200) {
+              return response.json();
+            }
+            setErrorMessage(statusCode(response));
+          })
+          .then((data) => {
+            console.log(data.token);
+            setToken(data.token);
+            navigate("/");
+          })
+          .catch((error) => {
+            console.log(error);
+          });
+      };
+
+
     return(
         <>
         <div className="registerContainer">
@@ -18,21 +54,26 @@ function Register() {
                     type="text"
                     label="Nome"
                     className="input-text"
-                    // value={name}
+                    value={name}
                     placeholder="Digite o seu nome completo"
                     required = "required"
+                    onChange={(e) => setName(e.target.value)}
+
                     />
                     <br />
                     <Input
                     type="email"
                     label="E-mail"
                     className="input-text"
-                    // value={email}
+                    value={email}
                     name="input"
                     placeholder="user@user.com"
                     required = "required"
                     pattern = {"[a-z0-9._%+-]+@[a-z0-9.-]+\.[a-z]{2, 4}$"}
                     title = "Insira um formato de email válido"
+                    onChange={(e) => setEmail(e.target.value)}
+
+                    
                     />
                     <br />
                     <Input
@@ -43,10 +84,12 @@ function Register() {
                     name="input"
                     placeholder="******"
                     required = "required"
+                    onChange={(e) => setPassword(e.target.value)}
+
                     />
                     <br />
 
-                <section className="role-register">
+                    <section className="role-register">
                     <h3 className="titulo-page"> Escolha seu cargo:</h3>
                     <br />
                     <label className="input-label"> Atendente </label>
@@ -54,30 +97,35 @@ function Register() {
                     <Input
                     type="radio"
                     className="input-radio"
-                    // label="Atendente"
-                    // value="saloon"
-                    // name="role"
-                    // checked={role === "saloon"}
-                    // onChange={(e) => setRole(e.target.value)}
+                    label="Atendente"
+                    value="saloon"
+                    name="role"
+                    checked={role === "saloon"}
+                    onChange={(e) => setRole(e.target.value)}
                     />
                     <br />
                     <label className="input-label"> Cozinha </label>
                     <Input
                     type="radio"
                     className="input-radio"
-                    // label="Cozinha"
-                    // value="kitchen"
-                    // name="role"
-                    // checked={role === "kitchen"}
-                    // onChange={(e) => setRole(e.target.value)}
+                    label="Cozinha"
+                    value="kitchen"
+                    name="role"
+                    checked={role === "kitchen"}
+                    onChange={(e) => setRole(e.target.value)}
                     />
                     <br />
-                </section>
+                    </section>
 
+                    <MessageStatusCode
+                    disable={errorMessage ? false : true}
+                    message={errorMessage}
+                    />
                 <BtnSubmit
                 type="submit"
                 className="button-submit"
-                text="Cadastrar"/>
+                text="Cadastrar"
+                onClick={signUp}/>
                 <br />
                 <p>
                     <Link
@@ -87,8 +135,6 @@ function Register() {
                     </Link>
                 </p>
         </form>
-        
-
         </div>
         </>
     );
