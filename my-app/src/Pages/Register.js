@@ -69,8 +69,8 @@ function Register() {
                     name="input"
                     placeholder="user@user.com"
                     required = "required"
-                    pattern = {"[a-z0-9._%+-]+@[a-z0-9.-]+\.[a-z]{2, 4}$"}
-                    title = "Insira um formato de email válido"
+                    // pattern = {"[a-z0-9._%+-]+@[a-z0-9.-]+\.[a-z]{2, 4}$"}
+                    // title = "Insira um formato de email válido"
                     onChange={(e) => setEmail(e.target.value)}
 
                     
@@ -80,7 +80,7 @@ function Register() {
                     type="password"
                     label="Senha"
                     className="input-text"
-                    // value={password}
+                    value={password}
                     name="input"
                     placeholder="******"
                     required = "required"
