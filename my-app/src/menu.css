@@ -1,0 +1,77 @@
+.menu-text {
+    font-size: 1.5rem;
+    line-height: 1.2;
+  }
+  
+  .container-button{
+    display: flex;
+    justify-content: space-between;
+
+    padding: 0.5rem;
+  }
+  
+  .container-menu {
+    display: flex;
+    align-items: center;
+    flex-direction: column;
+    min-height: 100vh;
+  }
+  
+  .show-menu {
+    display: grid;
+    border: 2px solid #DAA927;
+
+    width: 90%;
+    height: 300px;
+    overflow: auto;
+    margin-top: 28px;
+  }
+  .card-products-container {
+    display: grid;
+    place-items: center;
+  }
+  .card-container{
+    display: grid;
+    align-items: center;
+    width: 150px;
+    height: 200px;
+
+    margin-top: 10px;
+  }
+  
+  .card-products {
+ 
+  }
+  
+  .command-container {
+   
+  }
+  .command-ul {
+   
+  }
+  
+  .command-ul > .command-input {
+    
+  }
+  
+  .command-ul > .command-select {
+    
+  }
+  
+  .command-ul > .command-total {
+
+  }
+  
+  
+  .text-price-command {
+  }
+
+  .article-container-command{
+  
+  }
+  .command-ul-card{
+    
+  }
+  .aside-container-btn{
+    
+  }

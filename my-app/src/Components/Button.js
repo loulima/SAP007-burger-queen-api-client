@@ -1,21 +1,20 @@
-export const BtnSubmit = ({
+export const Button = ({
     type,
     value,
     onChange,
     text,
-    ...props
+   
 }) => {
     return (
     <>
         <button
-        type={type}
         className="button-submit"
+        type={type}
         value={value}
         onChange={onChange}
-        {...props} 
         >
         {text}
-      </button>
+        </button>
         </>
     
     );
