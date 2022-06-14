@@ -1,17 +1,18 @@
 export const Button = ({
-    type,
-    value,
-    onChange,
-    text,
-   
+  // children,
+  onClick,
+  type,
+  value,
+  text,
+  className,
 }) => {
     return (
     <>
         <button
-        className="button-submit"
         type={type}
         value={value}
-        onChange={onChange}
+        onClick={onClick}
+        className={className}
         >
         {text}
         </button>
@@ -19,3 +20,22 @@ export const Button = ({
     
     );
 };
+
+
+// export const Button = ({
+//     children,
+//     onClick,
+//     type,
+//     value,
+//     onChange,
+//     text,
+//     ...props
+//   }) => {
+//     return (
+//         <button
+//         {...props}>
+//         {children}
+//         </button>
+
+//     );
+//   };

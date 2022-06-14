@@ -2,7 +2,7 @@ import { useState } from "react";
 import { Link,  useNavigate } from "react-router-dom";
 import { createUser } from "../Services/auth";
 import { statusCode } from "../Services/error";
-import { setToken } from "../Services/localStorage";
+import { saveToken, saveRole } from "../Services/localStorage";
 import { ErrorMessage } from "../Components/ErrorMessage";
 import { Button } from "../Components/Button";
 import { Input } from "../Components/Input";
@@ -19,43 +19,29 @@ function Register() {
     const [errorMessage, setErrorMessage] = useState("");
     const navigate = useNavigate();
 
-    ///Função para entrar no sistema:
-    // const signUp = (e) => {
-    //     e.preventDefault();
-    //     createUser(name, email, password, role)
-    //       .then((response) => {
-    //         if (response.status === 200) {
-    //           return response.json();
-    //         }
-    //         setErrorMessage(statusCode(response));
-    //       })
-    //       .then((data) => {
-    //         console.log(data.token);
-    //         setToken(data.token);
-    //         navigate("/");
-    //       })
-    //       .catch((error) => {
-    //         console.log(error);
-    //       });
-    //   };
-
-    const signUp  = async (e) => {
+    const signUp = (e) => {
       e.preventDefault();
-      try {
-        const response = await createUser(
-          name, email, password, role
-        );
-        if (response.status === 200) {
-          const data = await response.json();
-          console.log(data.token);
-          setToken(data.token);
-          navigate("/");
-        }
-        setErrorMessage(statusCode(response));
-      } catch (error) {
-        console.log(error);
-      }
+      createUser(name, email, password, role)
+        .then((response) => {
+          if (response.status === 200) {
+            return response.json();
+          }
+          setErrorMessage(ErrorMessage(response));
+        })
+        .then((data) => {
+          saveToken(data.token);
+          saveRole(data.role);
+          if (data.role == "saloon") {
+            navigate("/Menu");
+          } else if (data.role == "kitchen") {
+            navigate("/Kitchen");
+          } else {
+            navigate("/login");
+          }
+        })
+        .catch((error) => ErrorMessage(error));
     };
+  
 
     return(
         <>
@@ -151,7 +137,7 @@ function Register() {
                 <p>
                     <Link
                         className="text-link"
-                        to="/">
+                        to="/login">
                         Voltar para Página Inicial
                     </Link>
                 </p>

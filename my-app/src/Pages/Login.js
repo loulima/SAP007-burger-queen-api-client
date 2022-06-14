@@ -1,7 +1,7 @@
 import { Link, useNavigate } from "react-router-dom";
 import { useState } from "react";
 import { statusCode } from "../Services/error";
-import { setToken } from "../Services/localStorage";
+import { saveToken, saveRole } from "../Services/localStorage";
 import { userLogin } from "../Services/auth";
 import { ErrorMessage } from "../Components/ErrorMessage";
 import { Button } from "../Components/Button";
@@ -15,40 +15,28 @@ export const Login= () => {
 
   const navigate = useNavigate();
   
-  const signIn= async (e) => {
+  const signIn = (e) => {
     e.preventDefault();
-    try {
-      const response = await userLogin(email, password);
-      if (response.status === 200) {
-        const data = await response.json();
-        console.log(data.token);
-        setToken(data.token);
-        navigate(data.role === "saloon" ? "/menu" : "/register");
-        navigate(data.role === "kitchen" ? "/kitchen" : "/register");
-      }
-      setErrorMessage(statusCode(response));
-    } catch (error) {
-      console.log(error);
-    }
+    userLogin(email, password)
+      .then((response) => {
+        if (response.status === 200) {
+          return response.json();
+        }
+        setErrorMessage(statusCode(response));
+      })
+      .then((data) => {
+        saveToken(data.token);
+        saveRole(data.role);
+        if (data.role == "saloon") {
+          navigate("/Menu");
+        } else if (data.role == "kitchen") {
+          navigate("/Kitchen");
+        } else {
+          navigate("/Register");
+        }
+      })
+      .catch((error) => console.log(error));
   };
-  // const signIn = (e) => {
-  //   e.preventDefault();
-  //   loginUser(email, password)
-  //     .then((response) => {
-  //       if (response.status === 200) {
-  //         return response.json();
-  //       }
-  //       setErrorMessage(statusCode(response));
-  //     })
-  //     .then((data) => {
-  //       console.log(data.token);
-  //       setToken(data.token);
-  //       navigate(data.role === "saloon" ? "/menu" : "/kitchen");
-  //     })
-  //     .catch((error) => {
-  //       console.log(error);
-  //     });
-  // };
   return (
     <section className="loginContainer">
 

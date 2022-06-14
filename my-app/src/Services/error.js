@@ -13,14 +13,7 @@ export const statusCode = (response) => {
     }
   };
 
-// export function codeErrorMenu (response){
-//     switch (response.status){
-//         case 400:
-//             return "Necessário informar nome e mesa do cliente";
-//         default:
-//           return "ocorreu um erro";
-//     }
-// }
+
 
 export const CreateOrderError = ({status}) => {
   switch (status) {
