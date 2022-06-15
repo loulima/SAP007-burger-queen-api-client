@@ -1,4 +1,8 @@
-export const Input = ({
+/* eslint-disable react/prop-types */
+/* eslint-disable import/prefer-default-export */
+/* eslint-disable react/react-in-jsx-scope */
+/* eslint-disable react/jsx-filename-extension */
+export function Input({
   name,
   type,
   value,
@@ -6,18 +10,16 @@ export const Input = ({
   onChange,
   className,
   required,
-}) => {
+}) {
   return (
-    <>
-      <input
-        name={name}
-        placeholder={placeholder}
-        className={className}
-        type={type}
-        value={value}
-        onChange={onChange}
-        required={required}
-      />
-    </>
+    <input
+      name={name}
+      placeholder={placeholder}
+      className={className}
+      type={type}
+      value={value}
+      onChange={onChange}
+      required={required}
+    />
   );
-};
+}
