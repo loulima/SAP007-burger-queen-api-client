@@ -4,7 +4,6 @@ export const MenuCard = ({
   complement,
   image,
   price,
-  children,
 }) => {
   return (
     <li className="item">
@@ -14,7 +13,6 @@ export const MenuCard = ({
       {complement === null ?
         "" : <h3 className="item-complement main-info">complemento: ${complement}</h3>}
       <h4 className="item-price main-info">R${price},00</h4>
-      {children}
     </li>
   );
 };

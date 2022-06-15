@@ -1,10 +1,10 @@
-import { useEffect,useState } from "react";
+import { useState } from "react";
 import { useNavigate } from "react-router-dom";
-import { getProducts } from "../Services/products";
+// import { getProducts } from "../Services/products";
 import logotipo from '../img/logotipo.svg';
 import { Button } from "../Components/Button";
 import { MenuCard } from "../Components/MenuCard";
-import { filterMenu } from "../filterMenu";
+// import { filterMenu } from "../filterMenu";
 import { removeToken } from "../Services/localStorage";
 
 export const Menu= () => {
@@ -19,20 +19,6 @@ const logout = () => {
     removeToken("token");
     navigate("/login");
   };
-
-useEffect(() => {
-    getProducts()
-      .then((response) => response.json())
-      .then((data) => {
-        
-        const filteredBreakfast = filterMenu(data, "breakfast");
-        setBreakfastMenu(filteredBreakfast);
-        
-        const filteredAllDay = filterMenu(data, "all-day");
-        setAllDayMenu(filteredAllDay);
-        setMenu(filteredBreakfast);
-      });
-  }, []);
 
 
 const handleClickMenu = (e) => {
