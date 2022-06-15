@@ -1,3 +1,9 @@
+.Bq-logo {
+  width:15%;
+  height:15%;
+ margin: 0 auto;
+}
+
 .menuTypes, .logout{
   width:150px;
   height:50px;
@@ -6,6 +12,8 @@
   color:white;
   border:none;
 }
+
+
 .menuTypesContainer{
   display:flex;
   justify-content: space-around;
@@ -25,4 +33,16 @@
 
 img{
   width: 150px;
+}
+
+@media (max-width:768px) {
+
+  .menuTypesContainer{
+    margin-bottom: 100px;
+  }
+  .Bq-logo {
+    width:25%;
+    height:25%;
+    margin: 0 auto;
+  }
 }
