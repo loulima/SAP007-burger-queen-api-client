@@ -92,7 +92,6 @@ const handleClickMenu = (e) => {
                 className="logout"
                 text="Sair"
                 onClick={logout}/>
-           
         </>
     )
     }

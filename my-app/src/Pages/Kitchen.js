@@ -1,5 +1,11 @@
+import logotipo from '../img/logotipo.svg';
+
 export const Kitchen= () => {
-<>
-    <p> bla bla bla</p>
+return (
+    <>
+        <img  className="Bq-logo"
+        alt="Burguer Queen logotipo"
+        src={logotipo}/>
 </>
+)
 }

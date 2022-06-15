@@ -1,5 +1,4 @@
 export const Button = ({
-  // children,
   onClick,
   type,
   value,
@@ -20,22 +19,3 @@ export const Button = ({
     
     );
 };
-
-
-// export const Button = ({
-//     children,
-//     onClick,
-//     type,
-//     value,
-//     onChange,
-//     text,
-//     ...props
-//   }) => {
-//     return (
-//         <button
-//         {...props}>
-//         {children}
-//         </button>
-
-//     );
-//   };
