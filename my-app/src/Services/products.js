@@ -1,4 +1,4 @@
-import { getToken } from "./localStorage";
+import { getToken } from "./localStorage.js";
 
 const url = "https://lab-api-bq.herokuapp.com";
 
