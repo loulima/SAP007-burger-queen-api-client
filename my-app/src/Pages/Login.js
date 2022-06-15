@@ -1,10 +1,10 @@
 import { Link, useNavigate } from "react-router-dom";
 import { useState } from "react";
 import { statusCode } from "../Services/error";
-import { setToken } from "../Services/localStorage";
-import { loginUser } from "../Services/auth";
-import { MessageStatusCode } from "../Components/MessageStatusCode";
-import { BtnSubmit } from "../Components/ButtonSubmit";
+import { saveToken, saveRole } from "../Services/localStorage";
+import { userLogin } from "../Services/auth";
+import { ErrorMessage } from "../Components/ErrorMessage";
+import { Button } from "../Components/Button";
 import { Input } from "../Components/Input";
 import logotipo from '../img/logotipo.svg';
 
@@ -14,10 +14,10 @@ export const Login= () => {
   const [errorMessage, setErrorMessage] = useState("");
 
   const navigate = useNavigate();
-
+  
   const signIn = (e) => {
     e.preventDefault();
-    loginUser(email, password)
+    userLogin(email, password)
       .then((response) => {
         if (response.status === 200) {
           return response.json();
@@ -25,15 +25,18 @@ export const Login= () => {
         setErrorMessage(statusCode(response));
       })
       .then((data) => {
-        console.log(data.token);
-        setToken(data.token);
-        navigate(data.role === "saloon" ? "/menu" : "/kitchen");
+        saveToken(data.token);
+        saveRole(data.role);
+        if (data.role == "saloon") {
+          navigate("/Menu");
+        } else if (data.role == "kitchen") {
+          navigate("/Kitchen");
+        } else {
+          navigate("/Register");
+        }
       })
-      .catch((error) => {
-        console.log(error);
-      });
+      .catch((error) => console.log(error));
   };
-
   return (
     <section className="loginContainer">
 
@@ -44,17 +47,20 @@ export const Login= () => {
         <form className="loginForm">
           <h2 className="titulo-page"> Login </h2>
           <br />
+          <label htmlFor="emailInputId" className="input-label">Email </label>
             <Input
+            id="emailInputId"
             type="email"
             className="input-text"
             label= "E-mail"
             placeholder="user@email.com"
             onChange={(e) => setEmail(e.target.value)}
-            autoFocus = "autoFocus"
             required = "required"
             />
             <br />
+            <label htmlFor="passwordInputId" className="input-label">Senha </label>
             <Input
+            id="passwordInputId"
             type="password"
             className="input-text"
             label="Senha"
@@ -64,14 +70,14 @@ export const Login= () => {
             />
 
             <br />
-            <BtnSubmit
+            <Button
             type="submit"
             className="button-submit"
             text="Entrar"
             onClick={signIn}
             />
 
-            <MessageStatusCode
+            <ErrorMessage
             disable={errorMessage ? false : true}
             message={errorMessage}
             />
@@ -80,7 +86,7 @@ export const Login= () => {
             <p className="text-link"> Não tem uma conta?
               <Link
                 className="text-link"
-                to="/Register">
+                to="/register">
                 Cadastre-se
               </Link>
             </p>

@@ -2,9 +2,9 @@ import { useState } from "react";
 import { Link,  useNavigate } from "react-router-dom";
 import { createUser } from "../Services/auth";
 import { statusCode } from "../Services/error";
-import { setToken } from "../Services/localStorage";
-import { MessageStatusCode } from "../Components/MessageStatusCode";
-import { BtnSubmit } from "../Components/ButtonSubmit";
+import { saveToken, saveRole } from "../Services/localStorage";
+import { ErrorMessage } from "../Components/ErrorMessage";
+import { Button } from "../Components/Button";
 import { Input } from "../Components/Input";
 import logotipo from '../img/logotipo.svg';
 
@@ -15,30 +15,33 @@ function Register() {
     const [name, setName] = useState("");
     const [email, setEmail] = useState("");
     const [password, setPassword] = useState("");
-    const [role, setRole] = useState("saloon");
+    const [role, setRole] = useState("");
     const [errorMessage, setErrorMessage] = useState("");
     const navigate = useNavigate();
 
-    ///Função para entrar no sistema:
     const signUp = (e) => {
-        e.preventDefault();
-        createUser(name, email, password, role)
-          .then((response) => {
-            if (response.status === 200) {
-              return response.json();
-            }
-            setErrorMessage(statusCode(response));
-          })
-          .then((data) => {
-            console.log(data.token);
-            setToken(data.token);
-            navigate("/");
-          })
-          .catch((error) => {
-            console.log(error);
-          });
-      };
-
+      e.preventDefault();
+      createUser(name, email, password, role)
+        .then((response) => {
+          if (response.status === 200) {
+            return response.json();
+          }
+          setErrorMessage(ErrorMessage(response));
+        })
+        .then((data) => {
+          saveToken(data.token);
+          saveRole(data.role);
+          if (data.role == "saloon") {
+            navigate("/Menu");
+          } else if (data.role == "kitchen") {
+            navigate("/Kitchen");
+          } else {
+            navigate("/login");
+          }
+        })
+        .catch((error) => ErrorMessage(error));
+    };
+  
 
     return(
         <>
@@ -49,8 +52,10 @@ function Register() {
         
         <form className="register-form">
             <h2 className="titulo-page"> Criar Conta </h2>
-            
+
+            <label htmlFor="nameRegister" className="input-label">Nome </label>
                     <Input
+                    id="nameRegister"
                     type="text"
                     label="Nome"
                     className="input-text"
@@ -61,7 +66,9 @@ function Register() {
 
                     />
                     <br />
+                    <label htmlFor="emailRegister" className="input-label">Email </label>
                     <Input
+                    id="emailRegister"
                     type="email"
                     label="E-mail"
                     className="input-text"
@@ -69,14 +76,14 @@ function Register() {
                     name="input"
                     placeholder="user@user.com"
                     required = "required"
-                    // pattern = {"[a-z0-9._%+-]+@[a-z0-9.-]+\.[a-z]{2, 4}$"}
-                    // title = "Insira um formato de email válido"
                     onChange={(e) => setEmail(e.target.value)}
 
                     
                     />
                     <br />
+                    <label htmlFor="passwordRegister" className="input-label">Senha </label>
                     <Input
+                    id="passwordRegister"
                     type="password"
                     label="Senha"
                     className="input-text"
@@ -92,23 +99,23 @@ function Register() {
                     <section className="role-register">
                     <h3 className="titulo-page"> Escolha seu cargo:</h3>
                     <br />
-                    <label className="input-label"> Atendente </label>
-                    
+
+                    <label htmlFor="saloonRole" > Atendente </label>
                     <Input
+                    id="saloonRole"
                     type="radio"
                     className="input-radio"
-                    label="Atendente"
                     value="saloon"
                     name="role"
                     checked={role === "saloon"}
                     onChange={(e) => setRole(e.target.value)}
                     />
-                    <br />
-                    <label className="input-label"> Cozinha </label>
+                    
+                    <label htmlFor="kitchenRole" > Cozinha </label>
                     <Input
+                    id="kitchenRole"
                     type="radio"
                     className="input-radio"
-                    label="Cozinha"
                     value="kitchen"
                     name="role"
                     checked={role === "kitchen"}
@@ -117,11 +124,11 @@ function Register() {
                     <br />
                     </section>
 
-                    <MessageStatusCode
+                    <ErrorMessage
                     disable={errorMessage ? false : true}
                     message={errorMessage}
                     />
-                <BtnSubmit
+                <Button
                 type="submit"
                 className="button-submit"
                 text="Cadastrar"
@@ -130,7 +137,7 @@ function Register() {
                 <p>
                     <Link
                         className="text-link"
-                        to="/">
+                        to="/login">
                         Voltar para Página Inicial
                     </Link>
                 </p>
